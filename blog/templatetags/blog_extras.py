@@ -1,8 +1,7 @@
 from django import template
 from django.contrib.auth import get_user_model
-from django.utils.html import escape
-from django.utils.safestring import mark_safe
 from django.utils.html import format_html
+
 from blog.models import Post
 
 user_model = get_user_model()
@@ -31,6 +30,7 @@ def author_details(author, current_user):
         suffix = ""
 
     return format_html('{}{}{}', prefix, name, suffix)
+
 
 @register.simple_tag(takes_context=True)
 def author_details_tag(context):
@@ -74,7 +74,7 @@ def col(extra_classes=""):
 
 @register.simple_tag
 def endcol():
-    return format_html("</div>")    
+    return format_html("</div>")
 
 
 @register.inclusion_tag("blog/post-list.html")
