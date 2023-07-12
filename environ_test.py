@@ -24,10 +24,6 @@ python3 environ_test.py
 """
 
 
-
-
-
-
 print(f"Value of 'MUST_BE_SET': '{environ['MUST_BE_SET']}'")
 print(f"Value of 'PYTHON_DEFAULT': '{environ['PYTHON_DEFAULT']}'")
 
