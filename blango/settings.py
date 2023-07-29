@@ -207,6 +207,12 @@ class Dev(Configuration):
 
     INTERNAL_IPS = ["192.168.10.93"]
     AUTH_USER_MODEL = "blango_auth.User"
+     # this is for django-registration-redux app to allow users to register
+    # registration_closed.html template will be shown instead of the registration form.
+    REGISTRATION_OPEN = True #by default is true
+    ACCOUNT_ACTIVATION_DAYS = 7
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 class Prod(Dev):
     DEBUG = values.BooleanValue(False)
