@@ -46,12 +46,19 @@ class Dev(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'django.contrib.sites',
         'django.contrib.staticfiles',
         "blango_auth",
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
         "debug_toolbar",
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.google',
+
+
     ]
 
     MIDDLEWARE = [
@@ -213,6 +220,16 @@ class Dev(Configuration):
     ACCOUNT_ACTIVATION_DAYS = 7
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+    SITE_ID = 1 # Django will automatically create one when we next migrate
+    # Normally when Django Allauth creates a User object from a social account login, 
+    # it will generate it a username based on the user ID at the third party.
+    # Since our custom User model doesn’t have a username field, Django Allauth will fail, 
+    # unless we make some settings changes.
+
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_USERNAME_REQUIRED = False
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 class Prod(Dev):
     DEBUG = values.BooleanValue(False)
